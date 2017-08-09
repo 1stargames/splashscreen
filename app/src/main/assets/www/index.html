@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>1 Star Games</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <style>
+        /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+        /* must <= # of divs inside .star in the markup */
+        /* <= 0.75 */
+        .star {
+            position: absolute;
+            left: 50%;
+            margin-left: 0;
+            margin-top: -50px;
+            top: 50%;
+        }
+        .star div {
+            border-bottom: 100px solid gold;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            width: 0px;
+            height: 0px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -50px;
+            margin-top: -50px;
+            transform-origin: 50% 100%;
+        }
+        .star div:nth-child(1) {
+            transform: rotate(0deg);
+        }
+        .star div:nth-child(2) {
+            transform: rotate(72deg);
+        }
+        .star div:nth-child(3) {
+            transform: rotate(144deg);
+        }
+        .star div:nth-child(4) {
+            transform: rotate(216deg);
+        }
+        .star div:nth-child(5) {
+            transform: rotate(288deg);
+        }
+    </style>
+    <script src="prefixfree.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var rainbowpastelcolors = ["#f4b4b4", "#eecdab", "#f9f5a8", "#99fbcc", "#88d8ea"];
+            $("body").css("background-color", rainbowpastelcolors[Math.floor(Math.random() * rainbowpastelcolors.length)]); //edit, body must be in quotes!
+        });
+    </script>
+</head>
+
+<body>
+<div class='star'>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+</body>
+</html>

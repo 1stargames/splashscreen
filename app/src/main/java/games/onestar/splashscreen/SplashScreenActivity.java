@@ -3,11 +3,9 @@ package games.onestar.splashscreen;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
-import java.util.Random;
+import android.webkit.WebView;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -15,6 +13,11 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        WebView webView;
+        webView = (WebView) findViewById(R.id.webview);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl("file:///android_asset/www/index.html");
 
         int uiOptions = this.getWindow().getDecorView().getSystemUiVisibility();
 
@@ -31,13 +34,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
-
-        // Set background color
-        int[] androidColors = getResources().getIntArray(R.array.rainbowpastelcolors);
-        int randomAndroidColor = androidColors[new Random().nextInt(androidColors.length)];
-
-        ConstraintLayout splashScreenLayout = (ConstraintLayout) findViewById(R.id.splashscreenlayout);
-        splashScreenLayout.setBackgroundColor(randomAndroidColor);
 
         Intent intent = new Intent();
         intent.setAction("games.onestar.splashscreen.SPLASH_SCREEN_FINISHED");
