@@ -1,5 +1,6 @@
 package games.onestar.splashscreen;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -37,6 +38,10 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         ConstraintLayout splashScreenLayout = (ConstraintLayout) findViewById(R.id.splashscreenlayout);
         splashScreenLayout.setBackgroundColor(randomAndroidColor);
+
+        Intent intent = new Intent();
+        intent.setAction("games.onestar.splashscreen.SPLASH_SCREEN_FINISHED");
+        sendBroadcast(intent);
     }
 
 }
