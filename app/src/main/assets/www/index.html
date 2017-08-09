@@ -50,8 +50,25 @@
     <script>
         $(document).ready(function () {
             var rainbowpastelcolors = ["#f4b4b4", "#eecdab", "#f9f5a8", "#99fbcc", "#88d8ea"];
-            $("body").css("background-color", rainbowpastelcolors[Math.floor(Math.random() * rainbowpastelcolors.length)]); //edit, body must be in quotes!
+            $("body").css("background-color", rainbowpastelcolors[Math.floor(Math.random() * rainbowpastelcolors.length)]);
+            $("body").click(function() {
+                //$("body").css("background-color", rainbowpastelcolors[Math.floor(Math.random() * rainbowpastelcolors.length)]);
+                var filteredrainbowpastelcolors = jQuery.grep(rainbowpastelcolors, function(value) {
+                    return value != hexc($("body").css("background-color"));
+                });
+                $("body").css("background-color", filteredrainbowpastelcolors[Math.floor(Math.random() * filteredrainbowpastelcolors.length)]);
+            });
         });
+        function hexc(colorval) {
+            var parts = colorval.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+            delete(parts[0]);
+            for (var i = 1; i <= 3; ++i) {
+                parts[i] = parseInt(parts[i]).toString(16);
+                if (parts[i].length == 1) parts[i] = '0' + parts[i];
+            }
+            color = '#' + parts.join('');
+            return color;
+        }
     </script>
 </head>
 
