@@ -1,14 +1,27 @@
 package games.onestar.splashscreen;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebView;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
+    // Time elapsed before launching next activity
+    private static final int NEXT_ACTIVITY_DELAY = 3000; // 3 sec
+
+    private static final String NEXT_ACTIVITY_INTENT_PREFIX = "games.onestar.START_";
+
+    // Activity meta data key representing the newt activity
+    private static final String NEXT_ACTIVITY_KEY = "activity_key";
+
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +48,23 @@ public class SplashScreenActivity extends AppCompatActivity {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
 
-        Intent intent = new Intent();
-        intent.setAction("games.onestar.splashscreen.SPLASH_SCREEN_FINISHED");
-        sendBroadcast(intent);
+        Handler handler = new Handler();
+        handler.postDelayed(launchTaskRunner, NEXT_ACTIVITY_DELAY);
     }
+
+    private Runnable launchTaskRunner = new Runnable() {
+        public void run() {
+            try {
+                ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
+                Bundle bundle = applicationInfo.metaData;
+                String activityKey = bundle.getString(NEXT_ACTIVITY_KEY);
+                Intent intent = new Intent();
+                intent.setAction(NEXT_ACTIVITY_INTENT_PREFIX + activityKey);
+                sendBroadcast(intent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
 }
