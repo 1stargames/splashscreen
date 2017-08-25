@@ -32,6 +32,23 @@ public class SplashScreenActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("file:///android_asset/www/index.html");
 
+        setScreen();
+
+        Handler handler = new Handler();
+        handler.postDelayed(launchTaskRunner, NEXT_ACTIVITY_DELAY);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        setScreen();
+        
+        Handler handler = new Handler();
+        handler.postDelayed(launchTaskRunner, NEXT_ACTIVITY_DELAY);
+    }
+
+    private void setScreen() {
         int uiOptions = this.getWindow().getDecorView().getSystemUiVisibility();
 
         uiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
@@ -47,9 +64,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
-
-        Handler handler = new Handler();
-        handler.postDelayed(launchTaskRunner, NEXT_ACTIVITY_DELAY);
     }
 
     private Runnable launchTaskRunner = new Runnable() {
