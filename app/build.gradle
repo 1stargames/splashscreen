@@ -33,7 +33,7 @@ dependencies {
     /**
      * Android, Google & Jetbrains
      */
-    compile 'org.jetbrains.kotlin:kotlin-stdlib:1.2.10'
+    compile 'org.jetbrains.kotlin:kotlin-stdlib:1.2.30'
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
