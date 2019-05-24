@@ -14,12 +14,12 @@ class SplashScreenActivity : AppCompatActivity() {
 
     companion object {
         // Time elapsed before launching next activity
-        private val NEXT_ACTIVITY_DELAY = 3000 // 3 sec
+        private const val NEXT_ACTIVITY_DELAY = 3000 // 3 sec
 
-        private val NEXT_ACTIVITY_INTENT_PREFIX = "games.onestar.START_"
+        private const val NEXT_ACTIVITY_INTENT_PREFIX = "games.onestar.START_"
 
         // Activity meta data key representing the newt activity
-        private val NEXT_ACTIVITY_KEY = "activity_key"
+        private const val NEXT_ACTIVITY_KEY = "activity_key"
     }
 
     private val launchTaskRunner = Runnable {
